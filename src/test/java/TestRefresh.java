@@ -25,7 +25,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestRefresh
 {
@@ -34,11 +34,10 @@ public class TestRefresh
     {
         WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver();
-        driver.get("https://developer.mozilla.org/fr/docs/Web/API/console");
-        assertEquals("Console", driver.findElement(By.className("title")).getText());
+        driver.get("http://localhost:8080");
+        assertTrue(driver.findElement(By.tagName("body")).isDisplayed());
         driver.navigate().refresh();
-        assertEquals("Console", driver.findElement(By.className("title")).getText());
-        assertEquals("https://developer.mozilla.org/fr/docs/Web/API/console", driver.getCurrentUrl());
+        assertTrue(driver.findElement(By.tagName("body")).isDisplayed());
         driver.quit();
     }
 }
